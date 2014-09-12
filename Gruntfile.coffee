@@ -35,11 +35,8 @@ module.exports = (grunt) ->
         files:
           'test/test.js': ['test/**/*.js']
         options:
-          browserifyOptions:
-            debug: true
-            entries: ['./test/x.js']
           preBundleCB: (b) ->
-            b.plugin(require('./dist/plugin'))
+            b.plugin(require('./dist/index').plugin)
 
     watch:
       files: ['src/**/*.coffee', 'test/**/*.coffee'],

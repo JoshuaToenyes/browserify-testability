@@ -1,5 +1,9 @@
 
+# ======== Module Constants =========
+
 SPLIT_REGEXP = /[\s,\|]+/
+
+
 
 # ========= Module Classes ==========
 
@@ -8,10 +12,12 @@ class Testability
   # Constructor takes a reference to the local require function (this is
   # mandatory).
   constructor: (@_require) ->
+    @_root = window || global
+    @_required = []
     if typeof @_require != 'function'
-      throw new Error "Testability Error: No reference to local `require()` received. You must pass
-        a local reference to the local require function. Try something like 
-        `testability = require('testability')(require);`"
+      throw new Error "Testability Error: No reference to local `require()`
+        received. You must pass a local reference to the local require function.
+        Try something like `testability = require('testability')(require);`"
 
 
   # Loads the passed module and dependency doubles (mocks, stubs, etc.). Mock
@@ -19,6 +25,7 @@ class Testability
   # module path loaded globally via `replace()`.
   require: (module, doubles) ->
     old = {}
+    if @_required.indexOf(module) == -1 then @_required.push module
     for ms, d of doubles
       for m in ms.split SPLIT_REGEXP
         if @has m
@@ -44,31 +51,35 @@ class Testability
       @_replace module, double
 
 
+  # Restores the given module path to it's original module.
+  restore: (module) ->
+    for m in module.split SPLIT_REGEXP
+      @_root._testability_cache_[m] = null
+
+
+  # Clears all registered double modules.
+  restoreAll: ->
+    @_root._testability_cache_ = {}
+
+
+  # Returns true if the specified double module is in the setup for replacement.
+  has: (m) ->
+    !!@_root._testability_cache_[m]
+
+
+  # Returns the specified module double.
+  get: (m) ->
+    @_root._testability_cache_[m]
+
+
   # Internal-use replacement function.
   _replace: (module, double) ->
     for m in module.split SPLIT_REGEXP
-      _testability_cache_[m] = double
+      @_root._testability_cache_[m] = double
 
 
-  # Restores the given module path to it's original module. 
-  restore: (module) ->
-    for m in module.split SPLIT_REGEXP
-      _testability_cache_[m] = null
 
-      
-      
-  # Clears all registered double modules.
-  restoreAll: ->
-
-
-  has: (m) ->
-    !!_testability_cache_[m]
-
-
-  get: (m) ->
-    _testability_cache_[m]
-
-
+# ========= Module Exports ==========
 
 module.exports = (require) ->
   return new Testability(require)

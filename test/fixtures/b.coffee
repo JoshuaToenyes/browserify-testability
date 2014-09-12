@@ -1,3 +1,1 @@
-x = require './c'
-
-module.exports = 'b' + x
+module.exports = 'b'

@@ -4,7 +4,7 @@
   "author": "Joshua Toenyes <joshua.toenyes@me.com>",
   "version": "1.0.0-a.1",
   "license": "MIT",
-  "main": "dist/testability.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/JoshuaToenyes/testability"
@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "underscore": "1.7.x",
-    "module-deps": "3.5.x",
     "through": "2.3.x"
   },
   "devDependencies": {
@@ -36,6 +35,7 @@
     "util"
   ],
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "prepublish": "grunt compile"
   }
 }

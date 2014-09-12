@@ -4,8 +4,6 @@
   var previousRequire = typeof require == "function" && require;
   
   this._testability_cache_ = {};
-  this._restore_cache_ = {};
-  this._browserify_cache_ = cache;
   
   function newRequire(name, jumped, reload){
     
@@ -41,7 +39,7 @@
       var m = cache[name] = {exports:{}};
 
       // Create the require function for this module.
-      var req = function(x, reload, restore){
+      var req = function(x, reload){
         
         // Get the numeric ID for the module to load.
         var id = modules[name][1][x];
@@ -62,9 +60,16 @@
       // object.
       modules[name][0].call(m.exports, req, m, m.exports, outer, modules, cache, entry);
     }
+
+    var r = cache[name].exports;
+    
+    // prevent caching modified modules
+    if (reload) {
+      cache[name] = null
+    }
     
     // Return the module's exports object.
-    return cache[name].exports;
+    return r;
   }
   
   // Load and run all modules in the bundle, passing the numeric ID to newRequire.

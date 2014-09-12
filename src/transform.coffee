@@ -10,15 +10,14 @@ module.exports = ->
     /testability\.require\s*\(['"]([\w\/\.\-\~\@]+)['"]/g
   ]
 
-  header = (buf) ->
+  header = ->
     headerWritten = true
     "\n\n/* Testability Injected Dependencies */\n"
 
-  footer = (buf) ->
+  footer = ->
     if headerWritten then "/* End Injected Dependencies */\n" else ''
 
   inject = (m) ->
-    console.log injected
     if injected[m] then '' else injected[m] = "require('#{m}');\n"
 
   write = (buf) ->
