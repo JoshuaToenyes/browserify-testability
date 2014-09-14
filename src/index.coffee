@@ -1,2 +1,5 @@
 module.exports = require './testability'
-module.exports.plugin = require './plugin'
+
+# Prevent Browserify from including ./plugin
+if require.cache
+  module.exports.plugin = require './plugin'
