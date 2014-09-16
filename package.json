@@ -2,7 +2,7 @@
   "name": "browserify-testability",
   "description": "Testing utility for replacing dependencies with mock versions at test-time, without modifying the original source.",
   "author": "Joshua Toenyes <joshua.toenyes@me.com>",
-  "version": "1.0.0-a.1",
+  "version": "1.0.0-a.2",
   "license": "MIT",
   "main": "dist/index.js",
   "repository": {
@@ -14,12 +14,12 @@
   },
   "dependencies": {
     "underscore": "1.7.x",
-    "through": "2.3.x"
+    "through": "2.3.x",
+    "browser-pack": "3.1.x"
   },
   "devDependencies": {
     "mocha": "1.21.x",
     "chai": "1.9.x",
-    "browser-pack": "3.1.x",
     "grunt": "0.4.x",
     "grunt-contrib-copy": "0.5.x",
     "grunt-coffeelint": "0.0.13",
