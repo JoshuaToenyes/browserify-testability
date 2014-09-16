@@ -32,7 +32,8 @@
   },
   "keywords": [
     "testing",
-    "util"
+    "util",
+    "testability"
   ],
   "scripts": {
     "test": "grunt test",
