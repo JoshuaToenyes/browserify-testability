@@ -65,6 +65,13 @@ describe 'browserify-testability', ->
       }
       expect(a).to.eql('aab123c')
 
+    it 'works with non-local modules', ->
+      a = testability.require './fixtures/lib-test', {
+        'chai': 100,
+        'underscore': 222
+      }
+      expect(a).to.eql(100 + 222)
+
 
   describe '#replace', ->
 
