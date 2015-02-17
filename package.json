@@ -2,15 +2,15 @@
   "name": "browserify-testability",
   "description": "Testing utility for replacing dependencies with mock versions at test-time, without modifying the original source.",
   "author": "Joshua Toenyes <joshua.toenyes@me.com>",
-  "version": "1.0.0-a.2",
+  "version": "1.0.0-a.3",
   "license": "MIT",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JoshuaToenyes/testability"
+    "url": "https://github.com/JoshuaToenyes/browserify-testability"
   },
   "bugs": {
-    "url": "https://github.com/JoshuaToenyes/testability/issues"
+    "url": "https://github.com/JoshuaToenyes/browserify-testability/issues"
   },
   "dependencies": {
     "underscore": "1.7.x",
